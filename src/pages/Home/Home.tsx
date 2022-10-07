@@ -3,33 +3,31 @@ import Board from '../../components/Board';
 import Card from '../../components/Card';
 import { useState } from 'react';
 import { CardType } from '../../components/Card/Card';
+import { sampleItems } from '../../constants/sample';
 
 const Home = () => {
-  const [items, setItems] = useState<CardType[]>([
-    {
-      id: 1,
-      name: 'Mos Burgur Kunitachi',
-      category: 'Humburgur',
-      board: 'favorites',
-    },
-    {
-      id: 2,
-      name: 'Koenji Thai kaan',
-      category: 'Thaifood',
-      board: 'favorites',
-    },
-    {
-      id: 3,
-      name: 'Burgur King Kunitachi',
-      category: 'Humburgur',
-      board: 'favorites',
-    },
-  ]);
+  const [items, setItems] = useState<CardType[]>(sampleItems);
+
+  const moveCardHandler = (dragIndex: number, hoverIndex: number) => {
+    const dragItem = items[dragIndex];
+
+    if (dragItem) {
+      setItems((prevState) => {
+        const copiedStateArray = [...prevState];
+        // remove item by hoverIndex and put dragItem
+        const prevItem = copiedStateArray.splice(hoverIndex, 1, dragItem);
+        // remove item by dragIndex and put prevItem
+        copiedStateArray.splice(dragIndex, 1, prevItem[0]);
+
+        return copiedStateArray;
+      });
+    }
+  };
 
   const returnItemsForBoard = (boardName: string) => {
     return items
       .filter((item) => item.board === boardName)
-      .map((item) => (
+      .map((item, index) => (
         <Card
           key={item.id}
           id={item.id}
@@ -37,6 +35,8 @@ const Home = () => {
           category={item.category}
           setItems={setItems}
           board={item.board}
+          index={index}
+          moveCardHandler={moveCardHandler}
         ></Card>
       ));
   };
