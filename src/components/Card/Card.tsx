@@ -1,6 +1,7 @@
 import styles from './Card.module.scss';
 import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
 import { SetStateAction, useRef } from 'react';
+import { BoardNames } from '../../constants/variables';
 
 export interface CardType {
   id: number;
@@ -28,6 +29,8 @@ const Card = ({
   moveCardHandler,
 }: CardPropTypes) => {
   const ref = useRef<HTMLInputElement>(null);
+
+  // Change orders
   const [, drop] = useDrop({
     accept: 'CardType',
     hover(item: CardPropTypes, monitor) {
@@ -36,24 +39,15 @@ const Card = ({
       }
       const dragIndex = item.index;
       const hoverIndex = index;
-      // Don't replace items with themselves
       if (dragIndex === hoverIndex) {
         return;
       }
-      // Determine rectangle on screen
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
-      // Get vertical middle
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      // Determine mouse position
       const clientOffset = monitor.getClientOffset();
-      // Get pixels to the top
       const hoverClientY =
         clientOffset && clientOffset.y - hoverBoundingRect.top;
-      // Only perform the move when the mouse has crossed half of the items height
-      // When dragging downwards, only move when the cursor is below 50%
-      // When dragging upwards, only move when the cursor is above 50%
-      // Dragging downwards
       if (
         dragIndex < hoverIndex &&
         hoverClientY &&
@@ -61,7 +55,6 @@ const Card = ({
       ) {
         return;
       }
-      // Dragging upwards
       if (
         dragIndex > hoverIndex &&
         hoverClientY &&
@@ -69,17 +62,13 @@ const Card = ({
       ) {
         return;
       }
-      // Time to actually perform the action
       moveCardHandler(dragIndex, hoverIndex);
-      // Note: we're mutating the monitor item here!
-      // Generally it's better to avoid mutations,
-      // but it's good here for the sake of performance
-      // to avoid expensive index searches.
       item.index = hoverIndex;
     },
   });
 
-  const changeItemBoard = (currentItem: CardType, boardName: any) => {
+  // Change Board
+  const changeItemBoard = (currentItem: CardType, boardName: BoardNames) => {
     setItems((prevState: CardType[]) => {
       return prevState.map((prevItem) => {
         return {
@@ -90,16 +79,36 @@ const Card = ({
     });
   };
 
+  //
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'CardType',
     item: { id, index, name, category, setItems },
     end: (item: any, monitor: DragSourceMonitor) => {
       const dropResult: { dropEffect: string; name: string } | null =
         monitor.getDropResult();
-      if (dropResult && dropResult.name === 'Favorites') {
-        changeItemBoard(item, 'favorites');
-      } else {
-        changeItemBoard(item, 'goto');
+
+      if (dropResult && dropResult.name) {
+        const { name } = dropResult;
+        let boardName: BoardNames;
+
+        switch (name) {
+          case BoardNames.FAVORITES:
+            boardName = BoardNames.FAVORITES;
+            break;
+          case BoardNames.GO_TO:
+            boardName = BoardNames.GO_TO;
+            break;
+          case BoardNames.NOT_FAVORITES:
+            boardName = BoardNames.NOT_FAVORITES;
+            break;
+          case BoardNames.OKAY:
+            boardName = BoardNames.OKAY;
+            break;
+          default:
+            boardName = BoardNames.GO_TO;
+            break;
+        }
+        changeItemBoard(item, boardName);
       }
     },
     collect: (monitor: DragSourceMonitor) => ({

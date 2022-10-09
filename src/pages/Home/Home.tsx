@@ -4,6 +4,7 @@ import Card from '../../components/Card';
 import { useState } from 'react';
 import { CardType } from '../../components/Card/Card';
 import { sampleItems } from '../../constants/sample';
+import { BoardNames } from '../../constants/variables';
 
 const Home = () => {
   const [items, setItems] = useState<CardType[]>(sampleItems);
@@ -43,8 +44,18 @@ const Home = () => {
 
   return (
     <div className={styles.container}>
-      <Board title="Favorites">{returnItemsForBoard('favorites')}</Board>
-      <Board title="Goto">{returnItemsForBoard('goto')}</Board>
+      <Board title={BoardNames.GO_TO}>
+        {returnItemsForBoard(BoardNames.GO_TO)}
+      </Board>
+      <Board title={BoardNames.FAVORITES}>
+        {returnItemsForBoard(BoardNames.FAVORITES)}
+      </Board>
+      <Board title={BoardNames.NOT_FAVORITES}>
+        {returnItemsForBoard(BoardNames.NOT_FAVORITES)}
+      </Board>
+      <Board title={BoardNames.OKAY}>
+        {returnItemsForBoard(BoardNames.OKAY)}
+      </Board>
     </div>
   );
 };
