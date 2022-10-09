@@ -1,16 +1,18 @@
+import clsx from 'clsx';
 import { DropTargetMonitor, useDrop } from 'react-dnd';
 import styles from './Board.module.scss';
 
 type PropTypes = {
+  name: string;
   title: string;
   children: React.ReactNode;
 };
 
-const Board = ({ title, children }: PropTypes) => {
+const Board = ({ name, title, children }: PropTypes) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: 'CardType',
-    drop: () => ({ name: title }),
+    drop: () => ({ name: name }),
     collect: (monitor: DropTargetMonitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
@@ -19,8 +21,8 @@ const Board = ({ title, children }: PropTypes) => {
 
   // console.log('options', isOver, canDrop);
   return (
-    <div className={styles.boardContainer} ref={drop}>
-      <h2>{title}</h2>
+    <div className={clsx(styles.boardContainer, styles[name])} ref={drop}>
+      <h2 className={styles.title}>{title}</h2>
       {children}
     </div>
   );

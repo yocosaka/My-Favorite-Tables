@@ -1,7 +1,15 @@
 .card {
   // width: 100%;
   height: auto;
+  max-height: 14rem;
   padding: 2rem;
-  border: 3px solid var(--color-blue);
-  border-radius: 3px;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius);
+  // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: var(--box-shadow-1);
+  margin-bottom: 1rem;
+
+  &:hover {
+    box-shadow: var(--box-shadow-1-hover);
+  }
 }

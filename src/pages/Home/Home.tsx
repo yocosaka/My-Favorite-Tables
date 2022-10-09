@@ -2,7 +2,7 @@ import styles from './Home.module.scss';
 import Board from '../../components/Board';
 import Card from '../../components/Card';
 import { useState } from 'react';
-import { BoardNames } from '../../constants/variables';
+import { BoardNames, BoardTitles } from '../../constants/variables';
 import { itemsSelector } from '../../store/item/itemSlice';
 import { useSelector } from 'react-redux';
 import { ItemType } from '../../store/item/itemState';
@@ -43,19 +43,21 @@ const Home = () => {
 
   return (
     <div className={styles.container}>
-      <div>Favorite Tables</div>
       <div className={styles.boardContainer}>
-        <Board title={BoardNames.GO_TO}>
+        <Board name={BoardNames.GO_TO} title={BoardTitles.GO_TO}>
           {returnItemsForBoard(BoardNames.GO_TO)}
         </Board>
-        <Board title={BoardNames.FAVORITES}>
+        <Board name={BoardNames.FAVORITES} title={BoardTitles.FAVORITES}>
           {returnItemsForBoard(BoardNames.FAVORITES)}
         </Board>
-        <Board title={BoardNames.NOT_FAVORITES}>
-          {returnItemsForBoard(BoardNames.NOT_FAVORITES)}
-        </Board>
-        <Board title={BoardNames.OKAY}>
+        <Board name={BoardNames.OKAY} title={BoardTitles.OKAY}>
           {returnItemsForBoard(BoardNames.OKAY)}
+        </Board>
+        <Board
+          name={BoardNames.NOT_FAVORITES}
+          title={BoardTitles.NOT_FAVORITES}
+        >
+          {returnItemsForBoard(BoardNames.NOT_FAVORITES)}
         </Board>
       </div>
     </div>

@@ -1,5 +1,3 @@
 @use './abstracts/variables';
-
-body {
-  // background-color: var(--color-blue);
-}
+@use './core/reset';
+@use './core/base';

@@ -1,0 +1,18 @@
+html {
+  font-size: 62.5%; // 10px
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 10px;
+  color: var(--color-black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+}
+
+// .no-wrap {
+//   white-space: nowrap !important;
+// }
