@@ -2,21 +2,11 @@ import styles from './Card.module.scss';
 import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
 import { SetStateAction, useRef } from 'react';
 import { BoardNames } from '../../constants/variables';
+import { ItemType } from '../../store/item/itemState';
 
-export interface CardType {
-  id: number;
-  name: string;
-  category: string;
-  board: string;
-}
-
-export interface CardPropTypes {
-  id: number;
-  name: string;
-  category: string;
-  board: string;
+export interface CardPropTypes extends ItemType {
   index: number;
-  setItems: React.Dispatch<SetStateAction<CardType[]>>;
+  setItems: React.Dispatch<SetStateAction<ItemType[]>>;
   moveCardHandler: (dragIndex: number, hoverIndex: number) => void;
 }
 
@@ -68,8 +58,8 @@ const Card = ({
   });
 
   // Change Board
-  const changeItemBoard = (currentItem: CardType, boardName: BoardNames) => {
-    setItems((prevState: CardType[]) => {
+  const changeItemBoard = (currentItem: ItemType, boardName: BoardNames) => {
+    setItems((prevState: ItemType[]) => {
       return prevState.map((prevItem) => {
         return {
           ...prevItem,

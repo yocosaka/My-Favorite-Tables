@@ -7,6 +7,7 @@ type PropTypes = {
 };
 
 const Board = ({ title, children }: PropTypes) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: 'CardType',
     drop: () => ({ name: title }),
@@ -16,7 +17,7 @@ const Board = ({ title, children }: PropTypes) => {
     }),
   });
 
-  console.log('options', isOver, canDrop);
+  // console.log('options', isOver, canDrop);
   return (
     <div className={styles.boardContainer} ref={drop}>
       <h2>{title}</h2>
