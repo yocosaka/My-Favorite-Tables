@@ -18,7 +18,7 @@ export interface ItemType {
     convenience: ReviewType;
     price: ReviewType;
   };
-  scean?: string[];
+  scene?: string[];
   gmapInfo?: {
     id: string;
     // map
