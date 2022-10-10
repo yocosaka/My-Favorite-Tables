@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  font-family: 'Tajawal', sans-serif;
+  font-family: var(--font-default);
   font-size: 10px;
   color: var(--color-black);
   -webkit-font-smoothing: antialiased;

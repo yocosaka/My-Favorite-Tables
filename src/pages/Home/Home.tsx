@@ -6,6 +6,10 @@ import { BoardNames, BoardTitles } from '../../constants/variables';
 import { itemsSelector } from '../../store/item/itemSlice';
 import { useSelector } from 'react-redux';
 import { ItemType } from '../../store/item/itemState';
+import StarIcon from '@mui/icons-material/Star';
+import PedalBikeIcon from '@mui/icons-material/PedalBike';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 
 const Home = () => {
   const storeItems = useSelector(itemsSelector);
@@ -44,18 +48,31 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <div className={styles.boardContainer}>
-        <Board name={BoardNames.GO_TO} title={BoardTitles.GO_TO}>
+        <Board
+          name={BoardNames.GO_TO}
+          title={BoardTitles.GO_TO}
+          Icon={PedalBikeIcon}
+        >
           {returnItemsForBoard(BoardNames.GO_TO)}
         </Board>
-        <Board name={BoardNames.FAVORITES} title={BoardTitles.FAVORITES}>
+        <Board
+          name={BoardNames.FAVORITES}
+          title={BoardTitles.FAVORITES}
+          Icon={StarIcon}
+        >
           {returnItemsForBoard(BoardNames.FAVORITES)}
         </Board>
-        <Board name={BoardNames.OKAY} title={BoardTitles.OKAY}>
+        <Board
+          name={BoardNames.OKAY}
+          title={BoardTitles.OKAY}
+          Icon={ThumbUpAltIcon}
+        >
           {returnItemsForBoard(BoardNames.OKAY)}
         </Board>
         <Board
           name={BoardNames.NOT_FAVORITES}
           title={BoardTitles.NOT_FAVORITES}
+          Icon={ThumbDownAltIcon}
         >
           {returnItemsForBoard(BoardNames.NOT_FAVORITES)}
         </Board>
