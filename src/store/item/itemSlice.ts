@@ -18,13 +18,9 @@ const slice = createSlice({
       state.items.filter((item: ItemType) => item.id !== action.payload.id);
     },
     updateItem(state, action) {
-      state.items.map((item: ItemType) => {
-        if (item.id === action.payload.id) {
-          return { ...item, ...action.payload };
-        } else {
-          return item;
-        }
-      });
+      state.items.map((item: ItemType) =>
+        item.id === action.payload.id ? { ...item, ...action.payload } : item,
+      );
     },
   },
 });

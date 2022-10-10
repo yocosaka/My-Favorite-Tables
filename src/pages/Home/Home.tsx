@@ -37,6 +37,7 @@ const Home = () => {
           id={item.id}
           name={item.name}
           category={item.category}
+          area={item.area}
           setItems={setItems}
           board={item.board}
           index={index}

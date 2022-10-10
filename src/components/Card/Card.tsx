@@ -14,13 +14,14 @@ const Card = ({
   id,
   name,
   category,
+  area,
   setItems,
   index,
   moveCardHandler,
 }: CardPropTypes) => {
   const ref = useRef<HTMLInputElement>(null);
 
-  // Change orders
+  // Change Orders
   const [, drop] = useDrop({
     accept: 'CardType',
     hover(item: CardPropTypes, monitor) {
@@ -69,10 +70,10 @@ const Card = ({
     });
   };
 
-  //
+  // Change Board with drag
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'CardType',
-    item: { id, index, name, category, setItems },
+    item: { id, index, name, category, area, setItems },
     end: (item: any, monitor: DragSourceMonitor) => {
       const dropResult: { dropEffect: string; name: string } | null =
         monitor.getDropResult();
@@ -108,11 +109,13 @@ const Card = ({
 
   const opacity = isDragging ? 0.4 : 1;
   drag(drop(ref));
+
   return (
     <div className={styles.card} ref={ref} style={{ opacity }}>
-      <div className={styles.id}>{id}</div>
+      {/* <div className={styles.id}>{id}</div> */}
       <h1>{name}</h1>
       <div className={styles.category}>{category}</div>
+      <div className={styles.area}>{area}</div>
     </div>
   );
 };
