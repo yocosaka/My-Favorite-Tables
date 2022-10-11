@@ -1,50 +1,36 @@
-import React, { useState } from 'react';
-import { Marker, InfoWindow } from '@react-google-maps/api';
-import { PlaceType } from '../Maps';
+import { useState } from 'react';
+import { Marker, InfoWindowF } from '@react-google-maps/api';
+import { v4 as uuid } from 'uuid';
 
+type PlaceType = { name: string; pos: { lat: number; lng: number } };
 type PlaceInfoPropTypes = {
   places: PlaceType[];
 };
 
 const PlaceInfo = ({ places }: PlaceInfoPropTypes) => {
-  const [selected, setSelected] = useState<{
-    info: string;
-    location: { lat: number; lng: number };
-  } | null>(null);
+  const [selected, setSelected] = useState<PlaceType | undefined>(undefined);
 
+  // console.log(places);
   return (
     <>
-      {places.map((marker) => (
+      {places.map((place) => (
         <Marker
-          key={`${marker.location.lat * marker.location.lng}`}
-          position={{
-            lat: marker.location.lat,
-            lng: marker.location.lng,
-          }}
+          key={uuid()}
+          position={place.pos}
           onMouseOver={() => {
-            setSelected(marker);
-          }}
-          icon={{
-            url: 'url of icon',
-            origin: new window.google.maps.Point(0, 0),
-            anchor: new window.google.maps.Point(15, 15),
-            scaledSize: new window.google.maps.Size(30, 30),
+            setSelected(place);
           }}
         />
       ))}
-
       {selected ? (
-        <InfoWindow
-          position={{
-            lat: selected.location.lat,
-            lng: selected.location.lng,
-          }}
+        <InfoWindowF
+          position={selected.pos}
           onCloseClick={() => {
-            setSelected(null);
+            setSelected(undefined);
           }}
         >
-          <div>{selected.info}</div>
-        </InfoWindow>
+          <div>{selected.name}</div>
+        </InfoWindowF>
       ) : null}
     </>
   );

@@ -1,38 +1,13 @@
 // import styles from './Maps.module.scss';
-import React, { useCallback, useRef } from 'react';
+import React, { useState } from 'react';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import PlaceInfo from './PlaceInfo';
 import mapStyle from './helpers/mapStyle';
-
-export type PlaceType = {
-  info: string;
-  location: { lat: number; lng: number };
-};
-
-const places = [
-  {
-    info: 'Burger King Kunitachi',
-    location: { lat: 35.69808614232754, lng: 139.44707002452878 },
-  },
-  {
-    info: 'Mos Burger',
-    location: { lat: 35.69697959381257, lng: 139.44719877054865 },
-  },
-];
-
-const libraries: (
-  | 'places'
-  | 'geometry'
-  | 'drawing'
-  | 'localContext'
-  | 'visualization'
-)[] = ['places'];
 
 const containerStyle = {
   height: '60vh',
   width: '100%',
 };
-
 const options = {
   styles: mapStyle,
   disableDefaultUI: true,
@@ -42,25 +17,65 @@ const options = {
 const Maps = () => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GMAP_KEY || '',
-    libraries,
+    libraries: ['places'],
   });
-  const mapRef = useRef();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onMapLoad = useCallback((map: any) => {
-    mapRef.current = map;
-  }, []);
+  const [storeInfo, setStoreInfo] = useState<google.maps.places.PlaceResult>(
+    {},
+  );
+  const [center, setCenter] = useState<google.maps.LatLng | undefined>(
+    undefined,
+  );
 
-  const center = {
-    lat: 35.6992710906405,
-    lng: 139.44613661588468,
+  const onMapLoad = (map: HTMLDivElement | google.maps.Map) => {
+    const request = {
+      // query: 'Burger King Kunitachi',
+      query: 'Starbucks Tachikawa wakaba',
+      // fields: ['name', 'geometry'],
+      fields: [
+        'business_status',
+        'formatted_address',
+        'geometry',
+        'icon',
+        'icon_mask_base_uri',
+        'icon_background_color',
+        'name',
+        'photos',
+        'place_id',
+        'plus_code',
+        'types',
+        'opening_hours',
+        'price_level',
+        'rating',
+        'user_ratings_total',
+      ],
+    };
+
+    const service = new google.maps.places.PlacesService(map);
+    service.findPlaceFromQuery(request, (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+        const result = results[0];
+        // console.log('result', result);
+        setStoreInfo(result);
+
+        if (result.geometry?.location) {
+          const coordinates = new google.maps.LatLng({
+            lat: result.geometry?.location?.lat() as number,
+            lng: result.geometry?.location?.lng() as number,
+          });
+          setCenter(coordinates);
+        }
+      }
+    });
   };
+
+  const places = [storeInfo];
 
   return (
     <>
       {loadError && <div>Error</div>}
-      {!isLoaded && <div>Loading..</div>}
-      {!loadError && isLoaded && (
+      {!isLoaded && <div>Loading...</div>}
+      {!loadError && isLoaded && storeInfo && (
         <GoogleMap
           id="map"
           mapContainerStyle={containerStyle}
@@ -69,7 +84,15 @@ const Maps = () => {
           options={options}
           onLoad={onMapLoad}
         >
-          <PlaceInfo places={places} />
+          <PlaceInfo
+            places={places.map((place) => ({
+              name: place.name || '',
+              pos: {
+                lat: (place.geometry?.location?.lat() as number) || 0,
+                lng: (place.geometry?.location?.lng() as number) || 0,
+              },
+            }))}
+          />
         </GoogleMap>
       )}
     </>
