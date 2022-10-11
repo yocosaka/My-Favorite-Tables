@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from '../components/Header';
-import Home from '../pages/Home';
-import Places from '../pages/Places';
 import Categories from '../pages/Categories/Categories';
-import Scenes from '../pages/Scenes';
+import Home from '../pages/Home';
 import Maps from '../pages/Maps';
+import Places from '../pages/Places';
+import Scenes from '../pages/Scenes';
 
 const AppRouter = () => {
   return (

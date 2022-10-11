@@ -1,15 +1,15 @@
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import PedalBikeIcon from '@mui/icons-material/PedalBike';
+import StarIcon from '@mui/icons-material/Star';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import styles from './Home.module.scss';
 import Board from '../../components/Board';
 import Card from '../../components/Card';
-import { useState } from 'react';
 import { BoardNames, BoardTitles } from '../../constants/variables';
 import { itemsSelector } from '../../store/item/itemSlice';
-import { useSelector } from 'react-redux';
 import { ItemType } from '../../store/item/itemState';
-import StarIcon from '@mui/icons-material/Star';
-import PedalBikeIcon from '@mui/icons-material/PedalBike';
-import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 
 const Home = () => {
   const storeItems = useSelector(itemsSelector);

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { ItemsState, ItemType } from './itemState';
 import { RootState } from '..';
 import { sampleItems } from '../../constants/sample';
-import { ItemsState, ItemType } from './itemState';
 
 const initialState = {
   items: sampleItems,

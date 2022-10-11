@@ -1,6 +1,6 @@
-import styles from './Header.module.scss';
-import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import { Link, useLocation } from 'react-router-dom';
+import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+import styles from './Header.module.scss';
 
 const Header = () => {
   const { pathname } = useLocation();

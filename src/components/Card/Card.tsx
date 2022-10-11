@@ -1,6 +1,6 @@
-import styles from './Card.module.scss';
-import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
 import { SetStateAction, useRef } from 'react';
+import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
+import styles from './Card.module.scss';
 import { BoardNames } from '../../constants/variables';
 import { ItemType } from '../../store/item/itemState';
 
@@ -74,7 +74,7 @@ const Card = ({
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'CardType',
     item: { id, index, name, category, area, setItems },
-    end: (item: any, monitor: DragSourceMonitor) => {
+    end: (item: unknown, monitor: DragSourceMonitor) => {
       const dropResult: { dropEffect: string; name: string } | null =
         monitor.getDropResult();
 
@@ -99,7 +99,7 @@ const Card = ({
             boardName = BoardNames.GO_TO;
             break;
         }
-        changeItemBoard(item, boardName);
+        changeItemBoard(item as ItemType, boardName);
       }
     },
     collect: (monitor: DragSourceMonitor) => ({

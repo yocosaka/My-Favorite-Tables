@@ -1,11 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import AppRouter from './routes/AppRouter';
 import './styles/style.scss';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
+import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+import AppRouter from './routes/AppRouter';
+
 import store from './store';
 
 const root = ReactDOM.createRoot(

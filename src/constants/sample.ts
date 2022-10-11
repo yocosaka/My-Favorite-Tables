@@ -1,5 +1,5 @@
-import { BoardNames } from './variables';
 import { v4 as uuid } from 'uuid';
+import { BoardNames } from './variables';
 import { ItemType } from '../store/item/itemState';
 
 export const sampleItems: ItemType[] = [

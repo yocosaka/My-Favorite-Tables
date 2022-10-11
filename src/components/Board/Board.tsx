@@ -1,13 +1,14 @@
+import { DropTargetMonitor, useDrop } from 'react-dnd';
 import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import clsx from 'clsx';
-import { DropTargetMonitor, useDrop } from 'react-dnd';
 import styles from './Board.module.scss';
 
 type PropTypes = {
   name: string;
   title: string;
   children: React.ReactNode;
+  // eslint-disable-next-line @typescript-eslint/ban-types
   Icon?: OverridableComponent<SvgIconTypeMap<{}, 'svg'>> & {
     muiName: string;
   };

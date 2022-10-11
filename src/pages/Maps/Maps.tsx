@@ -1,8 +1,8 @@
 // import styles from './Maps.module.scss';
 import React, { useCallback, useRef } from 'react';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
-import mapStyle from './helpers/mapStyle';
 import PlaceInfo from './PlaceInfo';
+import mapStyle from './helpers/mapStyle';
 
 export type PlaceType = {
   info: string;
@@ -46,6 +46,7 @@ const Maps = () => {
   });
   const mapRef = useRef();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onMapLoad = useCallback((map: any) => {
     mapRef.current = map;
   }, []);

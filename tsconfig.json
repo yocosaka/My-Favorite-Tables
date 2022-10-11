@@ -1,21 +1,29 @@
 {
   "compilerOptions": {
+    "strict": true,
+    "baseUrl": ".",
+    "module": "esnext",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["googlemaps"],
     "allowJs": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "sourceMap": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "useUnknownInCatchVariables": false,
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
+    "noEmit": true
   },
-  "include": ["src"]
+  "include": ["**/*.ts", "**/*.tsx", "src", "generate.js"],
+  "exclude": ["node_modules"]
 }
