@@ -1,98 +1,90 @@
-// import styles from './Maps.module.scss';
-import React, { useState } from 'react';
-import { GoogleMap, useLoadScript } from '@react-google-maps/api';
-import PlaceInfo from './PlaceInfo';
-import mapStyle from './helpers/mapStyle';
+import { useState } from 'react';
+import {
+  GoogleMap,
+  InfoWindow,
+  MarkerF,
+  useLoadScript,
+} from '@react-google-maps/api';
 
 const containerStyle = {
-  height: '60vh',
+  height: '80vh',
   width: '100%',
 };
-const options = {
-  styles: mapStyle,
-  disableDefaultUI: true,
-  zoomControl: true,
-};
+
+const markers = [
+  {
+    id: 1,
+    name: 'Burger King Kunitachi',
+    position: { lat: 35.69852180694143, lng: 139.44730606135982 },
+  },
+  {
+    id: 2,
+    name: 'Les Entremets de Kunitachi',
+    position: { lat: 35.691065636491665, lng: 139.44720706161348 },
+  },
+  // {
+  //   id: 3,
+  //   name: 'acqua cotta',
+  //   position: { lat: 35.88071206676472, lng: 139.62904951533997 },
+  // },
+  {
+    id: 4,
+    name: 'Patisserie Ichirin KunitachiPatisserie Ichirin Kunitachi',
+    position: { lat: 35.71175834721385, lng: 139.43337130796024 },
+  },
+  // {
+  //   id: 5,
+  //   name: 'Baan-Esan',
+  //   position: { lat: 35.70554044971139, lng: 139.6490771233002 },
+  // },
+];
 
 const Maps = () => {
-  const { isLoaded, loadError } = useLoadScript({
+  const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GMAP_KEY || '',
-    libraries: ['places'],
   });
 
-  const [storeInfo, setStoreInfo] = useState<google.maps.places.PlaceResult>(
-    {},
-  );
-  const [center, setCenter] = useState<google.maps.LatLng | undefined>(
-    undefined,
-  );
+  const [activeMarker, setActiveMarker] = useState<number | null>(null);
 
-  const onMapLoad = (map: HTMLDivElement | google.maps.Map) => {
-    const request = {
-      // query: 'Burger King Kunitachi',
-      query: 'Starbucks Tachikawa wakaba',
-      // fields: ['name', 'geometry'],
-      fields: [
-        'business_status',
-        'formatted_address',
-        'geometry',
-        'icon',
-        'icon_mask_base_uri',
-        'icon_background_color',
-        'name',
-        'photos',
-        'place_id',
-        'plus_code',
-        'types',
-        'opening_hours',
-        'price_level',
-        'rating',
-        'user_ratings_total',
-      ],
-    };
-
-    const service = new google.maps.places.PlacesService(map);
-    service.findPlaceFromQuery(request, (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-        const result = results[0];
-        // console.log('result', result);
-        setStoreInfo(result);
-
-        if (result.geometry?.location) {
-          const coordinates = new google.maps.LatLng({
-            lat: result.geometry?.location?.lat() as number,
-            lng: result.geometry?.location?.lng() as number,
-          });
-          setCenter(coordinates);
-        }
-      }
-    });
+  const handleActiveMarker = (marker: number) => {
+    if (marker === activeMarker) {
+      return;
+    }
+    setActiveMarker(marker);
   };
 
-  const places = [storeInfo];
+  const handleOnLoad = (map: {
+    fitBounds: (arg0: google.maps.LatLngBounds) => void;
+  }) => {
+    const bounds = new google.maps.LatLngBounds();
+    markers.forEach(({ position }) => bounds.extend(position));
+    map.fitBounds(bounds);
+  };
 
   return (
     <>
-      {loadError && <div>Error</div>}
-      {!isLoaded && <div>Loading...</div>}
-      {!loadError && isLoaded && storeInfo && (
+      {!isLoaded ? (
+        <div>Loading...</div>
+      ) : (
         <GoogleMap
           id="map"
           mapContainerStyle={containerStyle}
-          center={center}
-          zoom={17}
-          options={options}
-          onLoad={onMapLoad}
+          onLoad={handleOnLoad}
+          onClick={() => setActiveMarker(null)}
         >
-          <PlaceInfo
-            places={places.map((place) => ({
-              name: place.name || '',
-              pos: {
-                lat: (place.geometry?.location?.lat() as number) || 0,
-                lng: (place.geometry?.location?.lng() as number) || 0,
-              },
-            }))}
-          />
+          {markers.map(({ id, name, position }) => (
+            <MarkerF
+              key={id}
+              position={position}
+              onClick={() => handleActiveMarker(id)}
+            >
+              {activeMarker === id ? (
+                <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                  <div>{name}</div>
+                </InfoWindow>
+              ) : null}
+            </MarkerF>
+          ))}
         </GoogleMap>
       )}
     </>
