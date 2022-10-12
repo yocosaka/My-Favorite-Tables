@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AddStore from 'src/pages/AddStore';
 import Header from '../components/Header';
 import Categories from '../pages/Categories/Categories';
 import Home from '../pages/Home';
@@ -16,6 +17,8 @@ const AppRouter = () => {
         <Route path="/categories" element={<Categories />} />
         <Route path="/scenes" element={<Scenes />} />
         <Route path="/maps" element={<Maps />} />
+        <Route path="/maps" element={<Maps />} />
+        <Route path="/add-store" element={<AddStore />} />
       </Routes>
     </BrowserRouter>
   );

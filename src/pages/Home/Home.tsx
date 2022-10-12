@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PedalBikeIcon from '@mui/icons-material/PedalBike';
 import StarIcon from '@mui/icons-material/Star';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
@@ -81,6 +82,7 @@ const Home = () => {
         </Board>
       </div>
       <BasicModal Component={AddItemForm} />
+      <Link to="add-store">Add Store</Link>
     </div>
   );
 };
