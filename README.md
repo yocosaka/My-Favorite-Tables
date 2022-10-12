@@ -44,7 +44,7 @@ Give a ⭐️ if you like this project!
 
 ## 📝 License
 
-The concept of this application is based on - [The Complete Node.js Developer Course](https://www.udemy.com/course/the-complete-nodejs-developer-course-2/) by Andrew Mead. Except for that, this project is [MIT](./LICENSE) licensed.
+This project is [MIT](./LICENSE) licensed.
 
 ## Acknowledgements
 
