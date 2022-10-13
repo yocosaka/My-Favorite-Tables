@@ -4,8 +4,8 @@ _NOTE: This project is still on going..._<br />
 This is the app to keep your favorite restaurants' information on boards.
 It allows you to list, manage, and record those restaurants and your review.
 In addition, you can search your restaurants' list by places, tags, and categories.
-![screenshot](./screenshot.png)
-![screenshot](./screenshot-map.png)
+![screenshot](./screenshots/main.png)
+![screenshot](./screenshots/map.png)
 
 ## Built With
 

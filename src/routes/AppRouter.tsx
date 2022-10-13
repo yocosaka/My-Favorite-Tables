@@ -17,7 +17,6 @@ const AppRouter = () => {
         <Route path="/categories" element={<Categories />} />
         <Route path="/scenes" element={<Scenes />} />
         <Route path="/maps" element={<Maps />} />
-        <Route path="/maps" element={<Maps />} />
         <Route path="/add-store" element={<AddStore />} />
       </Routes>
     </BrowserRouter>
