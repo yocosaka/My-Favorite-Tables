@@ -18,9 +18,9 @@ const AddTable = () => {
   const defaultCurrentLoc = new google.maps.LatLng(0, 0);
   const [currentLoc, setCurrentLoc] = useState<locationType>(defaultCurrentLoc);
   const [markers, setMarkers] = useState<(locationType | undefined)[]>([]);
-  const [table, setTable] = useState<google.maps.places.PlaceResult | undefined>(
-    undefined,
-  );
+  const [table, setTable] = useState<
+    google.maps.places.PlaceResult | undefined
+  >(undefined);
   const [bounds, setBounds] = useState<
     google.maps.LatLngBounds | google.maps.LatLngBoundsLiteral | undefined
   >(undefined);
@@ -87,7 +87,10 @@ const AddTable = () => {
             center={markers[0] || currentLoc}
             zoom={15}
             onLoad={(map: google.maps.Map) => onMapLoad(map)}
-            mapContainerStyle={{ height: '50vh', width: '100%' }}
+            mapContainerStyle={{
+              height: '400px',
+              width: '100%',
+            }}
           >
             {markers.map((mark) => {
               return (
@@ -110,10 +113,7 @@ const AddTable = () => {
               {table.photos && (
                 <div className={styles.imageContainer}>
                   <img
-                    src={table.photos[0].getUrl({
-                      maxWidth: 500,
-                      maxHeight: 500,
-                    })}
+                    src={table.photos[0].getUrl()}
                     alt={table.name}
                     className={styles.mainImage}
                   />
