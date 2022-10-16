@@ -1,6 +1,9 @@
 /*global google*/
 import React, { useState } from 'react';
+import GoogleIcon from '@mui/icons-material/Google';
+import WebAssetIcon from '@mui/icons-material/WebAsset';
 import { GoogleMap, StandaloneSearchBox, Marker } from '@react-google-maps/api';
+import { v4 as uuid } from 'uuid';
 import styles from './AddStore.module.scss';
 
 let markerArray = [];
@@ -72,56 +75,64 @@ const AddStore = () => {
       </div>
 
       <div className={styles.infoContainer}>
-        <div className={styles.textContainer}>
-          {store && (
-            <>
-              <h2>{store.name}</h2>
-              {/* <div></div>
-            <img src={} alt="" />
-          </div> */}
-              <div>{store.formatted_address}</div>
-              <div>{store.formatted_phone_number}</div>
-              <div>Status:{store.business_status}</div>
-              <div>Price: {store.price_level}</div>
-              <ul>
-                {store.types?.map((type) => (
-                  <li>{type}</li>
-                ))}
-              </ul>
-              <div>
-                {store.opening_hours?.weekday_text?.map((group) => (
-                  <div>{group}</div>
-                ))}
-              </div>
-              <div>PlaceID:{store.place_id}</div>
-
-              <div>
-                Google URL:
-                <a href={store.url}>{store.url}</a>
-              </div>
-              <div>
-                Website: <a href={store.website}>{store.website}</a>
-              </div>
-              <div>
-                <img src={store.icon} alt="" />
-              </div>
-            </>
-          )}
-        </div>
-
         <div className={styles.mapContainer}>
           <GoogleMap
             center={markers[0] || currentLoc}
             zoom={15}
             onLoad={(map: google.maps.Map) => onMapLoad(map)}
-            mapContainerStyle={{ height: '80vh', width: '50vw' }}
+            mapContainerStyle={{ height: '50vh', width: '100%' }}
           >
-            {markers.map((mark, index) => {
+            {markers.map((mark) => {
               return (
-                <Marker key={index} position={mark as google.maps.LatLng} />
+                <Marker key={uuid()} position={mark as google.maps.LatLng} />
               );
             })}
           </GoogleMap>
+        </div>
+
+        <div className={styles.textContainer}>
+          {store && (
+            <>
+              <div className={styles.titleWrapper}>
+                <img
+                  src={store.icon}
+                  alt={store.types ? store.types[0] : store.name}
+                />
+                <h2>{store.name}</h2>
+              </div>
+              {store.photos && (
+                <img
+                  src={store.photos[0].getUrl({
+                    maxWidth: 500,
+                    maxHeight: 500,
+                  })}
+                  alt={store.name}
+                  className={styles.storeImage}
+                />
+              )}
+              <div className={styles.address}>{store.formatted_address}</div>
+              {/* <div>{store.formatted_phone_number}</div> */}
+              {/* <div>Status:{store.business_status}</div> */}
+              {/* <div>Price: {store.price_level}</div> */}
+              <div className={styles.types}>
+                {store.types?.map((type) => (
+                  <div className={styles.type}>{type}</div>
+                ))}
+              </div>
+              {store.url && (
+                <div className={styles.url}>
+                  <GoogleIcon />
+                  <a href={store.url}>Google URL</a>
+                </div>
+              )}
+              {store.website && (
+                <div className={styles.website}>
+                  <WebAssetIcon />
+                  <a href={store.website}>Website</a>
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>

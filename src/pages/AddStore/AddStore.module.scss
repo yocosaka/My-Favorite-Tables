@@ -1,5 +1,4 @@
 .searchInputContainer {
-  // border: 1px solid tomato;
   width: 100%;
   max-width: 40rem;
   margin: 2rem auto;
@@ -15,20 +14,62 @@
 .infoContainer {
   width: 90%;
   margin: 0 auto;
-  &::after {
-    content: '';
-    display: table;
-    clear: both;
-    overflow: hidden;
-  }
+  display: flex;
+  gap: 3rem;
 }
 
 .textContainer {
-  border: 1px solid;
-  float: left;
+  max-width: 50%;
 }
 
 .mapContainer {
-  border: 1px solid salmon;
-  float: right;
+  width: 40%;
+}
+
+.titleWrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  img {
+    width: 2rem;
+    object-fit: contain;
+  }
+  h2 {
+    line-height: 1;
+    font-size: 2.6rem;
+  }
+}
+
+.storeImage {
+  margin-bottom: 1rem;
+}
+
+.address {
+  margin-bottom: 1rem;
+}
+
+.types {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+
+.type {
+  border: 1px solid;
+  border-radius: 2px;
+  padding: 0.4rem 0.6rem 0.2rem 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+}
+
+.website,
+.url {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
