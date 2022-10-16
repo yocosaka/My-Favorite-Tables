@@ -3,28 +3,33 @@ import React, { useState } from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
 import WebAssetIcon from '@mui/icons-material/WebAsset';
 import { GoogleMap, StandaloneSearchBox, Marker } from '@react-google-maps/api';
-import BasicModal from 'src/components/BasicModal';
+// import BasicModal from 'src/components/BasicModal';
+import Button from 'src/components/Button';
+import Page from 'src/components/Page';
 import { v4 as uuid } from 'uuid';
-import styles from './AddStore.module.scss';
-import AddStoreForm from '../../components/AddStoreForm';
+import styles from './AddTable.module.scss';
+import AddTableForm from '../../components/AddTableForm';
 
 let markerArray = [];
 
 type locationType = google.maps.LatLng;
 
-const AddStore = () => {
+const AddTable = () => {
   const defaultCurrentLoc = new google.maps.LatLng(0, 0);
   const [currentLoc, setCurrentLoc] = useState<locationType>(defaultCurrentLoc);
   const [markers, setMarkers] = useState<(locationType | undefined)[]>([]);
-  const [store, setStore] = useState<
-    google.maps.places.PlaceResult | undefined
-  >(undefined);
+  const [table, setTable] = useState<google.maps.places.PlaceResult | undefined>(
+    undefined,
+  );
   const [bounds, setBounds] = useState<
     google.maps.LatLngBounds | google.maps.LatLngBoundsLiteral | undefined
   >(undefined);
   const [searchBox, setSearchBox] = useState<
     google.maps.places.SearchBox | undefined
   >(undefined);
+
+  // Open Form
+  const [showForm, setShowForm] = useState<boolean>(false);
 
   const onMapLoad = (map: google.maps.Map) => {
     navigator?.geolocation.getCurrentPosition(
@@ -50,16 +55,16 @@ const AddStore = () => {
       console.log('results[0]', results[0]);
       const place = results[0]?.geometry?.location;
       markerArray.push(place);
-      setStore(results[0]);
-      console.log(store);
-      console.log(store && store.photos && store?.photos[0].html_attributions);
+      setTable(results[0]);
+      console.log(table);
+      console.log(table && table.photos && table?.photos[0].html_attributions);
     }
     setMarkers(markerArray);
     console.log('markerArray', markerArray);
   };
 
   return (
-    <div>
+    <Page>
       <div id="searchbox">
         <StandaloneSearchBox
           onLoad={onSBLoad}
@@ -69,7 +74,7 @@ const AddStore = () => {
           <div className={styles.searchInputContainer}>
             <input
               type="text"
-              placeholder="Search store to add by keyword"
+              placeholder="Search table to add by keyword"
               className={styles.input}
             />
           </div>
@@ -93,44 +98,50 @@ const AddStore = () => {
         </div>
 
         <div className={styles.textContainer}>
-          {store && (
+          {table && (
             <>
               <div className={styles.titleWrapper}>
                 <img
-                  src={store.icon}
-                  alt={store.types ? store.types[0] : store.name}
+                  src={table.icon}
+                  alt={table.types ? table.types[0] : table.name}
                 />
-                <h2>{store.name}</h2>
+                <h2>{table.name}</h2>
               </div>
-              {store.photos && (
-                <img
-                  src={store.photos[0].getUrl({
-                    maxWidth: 500,
-                    maxHeight: 500,
-                  })}
-                  alt={store.name}
-                  className={styles.storeImage}
-                />
+              {table.photos && (
+                <div className={styles.imageContainer}>
+                  <img
+                    src={table.photos[0].getUrl({
+                      maxWidth: 500,
+                      maxHeight: 500,
+                    })}
+                    alt={table.name}
+                    className={styles.mainImage}
+                  />
+                </div>
               )}
-              <div className={styles.address}>{store.formatted_address}</div>
-              {/* <div>{store.formatted_phone_number}</div> */}
-              {/* <div>Status:{store.business_status}</div> */}
-              {/* <div>Price: {store.price_level}</div> */}
+              <div className={styles.address}>{table.formatted_address}</div>
+              {/* <div>{table.formatted_phone_number}</div> */}
+              {/* <div>Status:{table.business_status}</div> */}
+              {/* <div>Price: {table.price_level}</div> */}
               <div className={styles.types}>
-                {store.types?.map((type) => (
+                {table.types?.map((type) => (
                   <div className={styles.type}>{type}</div>
                 ))}
               </div>
-              {store.url && (
+              {table.url && (
                 <div className={styles.url}>
                   <GoogleIcon />
-                  <a href={store.url}>Google URL</a>
+                  <a href={table.url} target="_blank">
+                    See on Google Map
+                  </a>
                 </div>
               )}
-              {store.website && (
+              {table.website && (
                 <div className={styles.website}>
                   <WebAssetIcon />
-                  <a href={store.website}>Website</a>
+                  <a href={table.website} target="_blank">
+                    Website
+                  </a>
                 </div>
               )}
             </>
@@ -138,9 +149,13 @@ const AddStore = () => {
         </div>
       </div>
 
-      <BasicModal Component={AddStoreForm} />
-    </div>
+      {/* <BasicModal Component={AddTableForm} /> */}
+      <Button onClick={() => setShowForm(!showForm)}>
+        {showForm ? 'Close form' : 'Add this table to my list'}
+      </Button>
+      {showForm && <AddTableForm table={table} />}
+    </Page>
   );
 };
 
-export default AddStore;
+export default AddTable;
