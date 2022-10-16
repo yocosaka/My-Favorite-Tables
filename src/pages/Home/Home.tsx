@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PedalBikeIcon from '@mui/icons-material/PedalBike';
 import StarIcon from '@mui/icons-material/Star';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import BasicModal from 'src/components/BasicModal';
 import styles from './Home.module.scss';
-import AddItemForm from '../../components/AddItemForm/AddItemForm';
 import Board from '../../components/Board';
 import Card from '../../components/Card';
 import { BoardNames, BoardTitles } from '../../constants/variables';
@@ -81,8 +78,6 @@ const Home = () => {
           {returnItemsForBoard(BoardNames.NOT_FAVORITES)}
         </Board>
       </div>
-      <BasicModal Component={AddItemForm} />
-      <Link to="add-store">Add Store</Link>
     </div>
   );
 };

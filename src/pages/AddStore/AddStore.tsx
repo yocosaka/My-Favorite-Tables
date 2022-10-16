@@ -46,6 +46,8 @@ const AddStore = () => {
       const place = results[0]?.geometry?.location;
       markerArray.push(place);
       setStore(results[0]);
+      console.log(store);
+      console.log(store && store.photos && store?.photos[0].html_attributions);
     }
     setMarkers(markerArray);
     console.log('markerArray', markerArray);
@@ -68,23 +70,59 @@ const AddStore = () => {
           </div>
         </StandaloneSearchBox>
       </div>
-      {store && (
-        <div>
-          <h2>{store.name}</h2>
-          <div>{store.adr_address}</div>
+
+      <div className={styles.infoContainer}>
+        <div className={styles.textContainer}>
+          {store && (
+            <>
+              <h2>{store.name}</h2>
+              {/* <div></div>
+            <img src={} alt="" />
+          </div> */}
+              <div>{store.formatted_address}</div>
+              <div>{store.formatted_phone_number}</div>
+              <div>Status:{store.business_status}</div>
+              <div>Price: {store.price_level}</div>
+              <ul>
+                {store.types?.map((type) => (
+                  <li>{type}</li>
+                ))}
+              </ul>
+              <div>
+                {store.opening_hours?.weekday_text?.map((group) => (
+                  <div>{group}</div>
+                ))}
+              </div>
+              <div>PlaceID:{store.place_id}</div>
+
+              <div>
+                Google URL:
+                <a href={store.url}>{store.url}</a>
+              </div>
+              <div>
+                Website: <a href={store.website}>{store.website}</a>
+              </div>
+              <div>
+                <img src={store.icon} alt="" />
+              </div>
+            </>
+          )}
         </div>
-      )}
-      <div style={{ marginTop: '80px' }}>
-        <GoogleMap
-          center={markers[0] || currentLoc}
-          zoom={15}
-          onLoad={(map: google.maps.Map) => onMapLoad(map)}
-          mapContainerStyle={{ height: '400px', width: '800px' }}
-        >
-          {markers.map((mark, index) => {
-            return <Marker key={index} position={mark as google.maps.LatLng} />;
-          })}
-        </GoogleMap>
+
+        <div className={styles.mapContainer}>
+          <GoogleMap
+            center={markers[0] || currentLoc}
+            zoom={15}
+            onLoad={(map: google.maps.Map) => onMapLoad(map)}
+            mapContainerStyle={{ height: '80vh', width: '50vw' }}
+          >
+            {markers.map((mark, index) => {
+              return (
+                <Marker key={index} position={mark as google.maps.LatLng} />
+              );
+            })}
+          </GoogleMap>
+        </div>
       </div>
     </div>
   );

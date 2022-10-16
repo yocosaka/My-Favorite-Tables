@@ -11,3 +11,24 @@
   font-size: 1.6rem;
   width: 100%;
 }
+
+.infoContainer {
+  width: 90%;
+  margin: 0 auto;
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+    overflow: hidden;
+  }
+}
+
+.textContainer {
+  border: 1px solid;
+  float: left;
+}
+
+.mapContainer {
+  border: 1px solid salmon;
+  float: right;
+}

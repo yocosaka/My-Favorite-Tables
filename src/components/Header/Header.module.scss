@@ -23,7 +23,7 @@
   justify-content: center;
   align-items: center;
   width: 80%;
-  max-width: 70rem;
+  max-width: 80rem;
   margin: 0 auto;
   border-bottom: 8px solid var(--color-black);
 }
@@ -51,6 +51,7 @@
       background: var(--color-white);
       color: var(--color-black);
       font-weight: bold;
+      white-space: nowrap;
     }
 
     &.current {

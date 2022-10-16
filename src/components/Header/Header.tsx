@@ -16,6 +16,9 @@ const Header = () => {
           <li className={pathname === '/' ? styles.current : ''}>
             <Link to="/">List</Link>
           </li>
+          <li className={pathname === '/add-store' ? styles.current : ''}>
+            <Link to="/add-store">Add Store</Link>
+          </li>
           <li className={pathname === '/places' ? styles.current : ''}>
             <Link to="/places">Places</Link>
           </li>
