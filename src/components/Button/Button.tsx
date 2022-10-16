@@ -5,13 +5,17 @@ import styles from './Button.module.scss';
 type PropTypes = {
   children: ReactNode;
   variant?: 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const Button = ({ children, variant }: PropTypes) => {
+const Button = ({ children, variant, onClick }: PropTypes) => {
   return (
-    <div className={clsx(styles.button, variant && styles[variant])}>
+    <button
+      className={clsx(styles.button, variant && styles[variant])}
+      onClick={onClick}
+    >
       {children}
-    </div>
+    </button>
   );
 };
 

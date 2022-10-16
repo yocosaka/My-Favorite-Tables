@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
 import WebAssetIcon from '@mui/icons-material/WebAsset';
 import { GoogleMap, StandaloneSearchBox, Marker } from '@react-google-maps/api';
+import BasicModal from 'src/components/BasicModal';
 import { v4 as uuid } from 'uuid';
 import styles from './AddStore.module.scss';
+import AddStoreForm from '../../components/AddStoreForm';
 
 let markerArray = [];
 
@@ -135,6 +137,8 @@ const AddStore = () => {
           )}
         </div>
       </div>
+
+      <BasicModal Component={AddStoreForm} />
     </div>
   );
 };

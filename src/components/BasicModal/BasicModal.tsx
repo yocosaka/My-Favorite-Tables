@@ -1,8 +1,9 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import styles from './BasicModal.module.scss';
+import Button from '../Button';
 
 type PropTypes = {
   Component: React.FC;
@@ -15,7 +16,7 @@ const BasicModal = ({ Component }: PropTypes) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>Open Modal</Button>
       <Modal
         open={open}
         onClose={handleClose}
