@@ -1,4 +1,4 @@
-import { BoardNames } from '../../constants/variables';
+// import { BoardNames } from '../../constants/variables';
 
 export interface ItemsState {
   items: ItemType[];
@@ -8,7 +8,7 @@ export interface ItemType {
   id: string;
   name: string; // in en
   category: string;
-  board: BoardNames;
+  // board: BoardNames;
   area: string;
   needToBook?: boolean;
   review?: {

@@ -18,16 +18,16 @@
   border-radius: 5px;
   padding: 1rem;
   // border: 1px solid blue;
-  &.goto {
+  &.WantToGo {
     background-color: var(--color-light-green);
   }
-  &.favorites {
+  &.Favorites {
     background-color: var(--color-light-orange);
   }
-  &.okay {
+  &.Okay {
     background-color: var(--color-light-cyan);
   }
-  &.not_favorites {
+  &.NotFavorites {
     background-color: var(--color-light-grey);
   }
 }

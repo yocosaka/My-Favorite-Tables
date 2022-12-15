@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import clsx from 'clsx';
 import { ItemType } from 'src/store/item/itemState';
 import { v4 as uuid } from 'uuid';
 import styles from './MyTables.module.scss';
 import { boardsData } from '../../constants/sample';
+import { BoardTitles } from '../../constants/variables';
+import { transformToCamelCase } from '../../utils/helper';
 import Card from '../Card/Card';
 
 const MyTables = () => {
@@ -11,7 +14,7 @@ const MyTables = () => {
 
   type ColumnsType = {
     [x: string]: {
-      title: string;
+      title: BoardTitles;
       items: ItemType[];
     };
   };
@@ -55,6 +58,8 @@ const MyTables = () => {
     }
   };
 
+  console.log();
+
   return (
     <DragDropContext
       onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
@@ -67,7 +72,10 @@ const MyTables = () => {
                 <div
                   ref={provided.innerRef}
                   {...provided.droppableProps}
-                  className={styles.board}
+                  className={clsx(
+                    styles.board,
+                    styles[transformToCamelCase(column.title)],
+                  )}
                 >
                   <div className={styles.title}>{column.title}</div>
                   {column.items.map((item, index) => (

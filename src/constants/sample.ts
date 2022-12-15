@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { BoardNames } from './variables';
+import { BoardTitles } from './variables';
 import { ItemType } from '../store/item/itemState';
 
 export const sampleItems: ItemType[] = [
@@ -8,60 +8,60 @@ export const sampleItems: ItemType[] = [
     name: 'Mos Burgur Kunitachi',
     category: 'Humburgur',
     area: 'Kunitachi',
-    board: BoardNames.GO_TO,
+    // board: BoardNames.TO_GO,
   },
   {
     id: uuid(),
     name: 'Koenji Thai kaan',
     category: 'Thaifood',
     area: 'Koenji',
-    board: BoardNames.GO_TO,
+    // board: BoardNames.TO_GO,
   },
   {
     id: uuid(),
     name: 'Burgur King Kunitachi',
     category: 'Humburgur',
     area: 'Kunitachi',
-    board: BoardNames.GO_TO,
+    // board: BoardNames.TO_GO,
   },
   {
     id: uuid(),
     name: 'Ichirin',
     category: 'Cake',
     area: 'Kunitachi',
-    board: BoardNames.GO_TO,
+    // board: BoardNames.TO_GO,
   },
   {
     id: uuid(),
     name: 'Komeda Coffee',
     category: 'Cafe',
     area: 'kunitachi',
-    board: BoardNames.GO_TO,
+    // board: BoardNames.TO_GO,
   },
   {
     id: uuid(),
     name: 'sushi near Kunitachi',
     category: 'Sushi',
     area: 'Kunitachi',
-    board: BoardNames.GO_TO,
+    // board: BoardNames.TO_GO,
   },
 ];
 
 export const boardsData = {
   [uuid()]: {
-    title: 'To Go',
+    title: BoardTitles.TO_GO,
     items: sampleItems,
   },
   [uuid()]: {
-    title: 'Favorites',
+    title: BoardTitles.FAVORITES,
     items: [],
   },
   [uuid()]: {
-    title: 'Okay',
+    title: BoardTitles.OKAY,
     items: [],
   },
   [uuid()]: {
-    title: 'Not Favorites',
+    title: BoardTitles.NOT_FAVORITES,
     items: [],
   },
 };
