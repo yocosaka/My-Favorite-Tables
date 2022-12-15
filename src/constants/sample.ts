@@ -40,9 +40,28 @@ export const sampleItems: ItemType[] = [
   },
   {
     id: uuid(),
-    name: 'Sushiro',
+    name: 'sushi near Kunitachi',
     category: 'Sushi',
-    area: 'tachikawa saiwaicho',
+    area: 'Kunitachi',
     board: BoardNames.GO_TO,
   },
 ];
+
+export const boardsData = {
+  [uuid()]: {
+    title: 'To Go',
+    items: sampleItems,
+  },
+  [uuid()]: {
+    title: 'Favorites',
+    items: [],
+  },
+  [uuid()]: {
+    title: 'Okay',
+    items: [],
+  },
+  [uuid()]: {
+    title: 'Not Favorites',
+    items: [],
+  },
+};

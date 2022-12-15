@@ -1,19 +1,18 @@
 .card {
-  // width: 100%;
-  height: auto;
-  max-height: 14rem;
+  // border: 1px solid orange;
+  background: white;
+  display: flex;
   padding: 2rem;
   background-color: var(--color-white);
   border-radius: var(--border-radius);
-  // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  box-shadow: var(--box-shadow-1);
+  min-height: 10rem;
   margin-bottom: 1rem;
-
   &:hover {
     box-shadow: var(--box-shadow-1-hover);
   }
 }
 
+.name,
 .area {
   text-transform: capitalize;
 }
