@@ -7,16 +7,16 @@
   gap: 2rem;
   border-radius: var(--border-radius);
   padding: 1rem;
-  box-shadow: var(--box-shadow-2);
 }
 
 .board {
   min-height: 100px;
   display: flex;
   flex-direction: column;
-  background: #f3f3f3;
+  background: var(--color-white);
   border-radius: 5px;
   padding: 1rem;
+  box-shadow: var(--box-shadow-2);
   // border: 1px solid blue;
   &.WantToGo {
     background-color: var(--color-light-green);

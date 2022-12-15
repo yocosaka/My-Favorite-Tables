@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import clsx from 'clsx';
 import { ItemType } from 'src/store/item/itemState';
@@ -58,7 +58,10 @@ const MyTables = () => {
     }
   };
 
-  console.log();
+  useEffect(() => {
+    console.log(columns);
+    // dispatch to store
+  }, [columns]);
 
   return (
     <DragDropContext
