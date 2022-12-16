@@ -1,6 +1,6 @@
 import { Draggable } from 'react-beautiful-dnd';
+import { ItemType } from 'src/constants/variables';
 import styles from './Card.module.scss';
-import { ItemType } from '../../store/item/itemState';
 
 type PropTypes = {
   item: ItemType;

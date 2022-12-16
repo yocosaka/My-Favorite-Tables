@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ItemsState, ItemType } from './itemState';
+import { ItemType } from 'src/constants/variables';
+import { ItemsState } from './itemState';
 import { RootState } from '..';
 import { sampleItems } from '../../constants/sample';
 

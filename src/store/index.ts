@@ -1,10 +1,10 @@
 import logger from 'redux-logger';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import itemReducer from './item/itemSlice';
+import columnsReducer from './columns/columnsSlice';
 
 const store = configureStore({
   reducer: combineReducers({
-   items: itemReducer,
+    columns: columnsReducer,
   }),
   middleware: (getDefaultMiddleWare) => getDefaultMiddleWare().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',
@@ -13,3 +13,6 @@ const store = configureStore({
 export default store;
 export type RootState = ReturnType<typeof store.getState>;
 export type AddDispatch = typeof store.dispatch;
+
+// TODO: Comment out this below line when deploying
+store.subscribe(() => console.log(store.getState()));

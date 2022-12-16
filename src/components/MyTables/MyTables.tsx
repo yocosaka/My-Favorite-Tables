@@ -1,23 +1,20 @@
 import { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
-import { ItemType } from 'src/store/item/itemState';
+import { columnsSelector, updateColumns } from 'src/store/columns/columnsSlice';
+import { ColumnsType } from 'src/store/columns/columnsState';
 import { v4 as uuid } from 'uuid';
 import styles from './MyTables.module.scss';
-import { boardsData } from '../../constants/sample';
-import { BoardTitles } from '../../constants/variables';
 import { transformToCamelCase } from '../../utils/helper';
 import Card from '../Card/Card';
 
 const MyTables = () => {
-  const [columns, setColumns] = useState(boardsData);
+  const columnsData = useSelector(columnsSelector);
+  const [columns, setColumns] = useState<ColumnsType>(columnsData);
+  const dispatch = useDispatch();
 
-  type ColumnsType = {
-    [x: string]: {
-      title: BoardTitles;
-      items: ItemType[];
-    };
-  };
   const onDragEnd = (
     result: DropResult,
     columns: ColumnsType,
@@ -59,9 +56,8 @@ const MyTables = () => {
   };
 
   useEffect(() => {
-    console.log(columns);
-    // dispatch to store
-  }, [columns]);
+    dispatch(updateColumns(columns));
+  }, [columns, dispatch]);
 
   return (
     <DragDropContext

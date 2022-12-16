@@ -1,6 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { BoardTitles } from './variables';
-import { ItemType } from '../store/item/itemState';
+import { BoardTitles, ItemType } from './variables';
 
 export const sampleItems: ItemType[] = [
   {
