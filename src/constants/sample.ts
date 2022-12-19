@@ -47,19 +47,19 @@ export const sampleItems: ItemType[] = [
 ];
 
 export const boardsData = {
-  [uuid()]: {
+  togo: {
     title: BoardTitles.TO_GO,
     items: sampleItems,
   },
-  [uuid()]: {
+  favorites: {
     title: BoardTitles.FAVORITES,
     items: [],
   },
-  [uuid()]: {
+  okay: {
     title: BoardTitles.OKAY,
     items: [],
   },
-  [uuid()]: {
+  not_favorites: {
     title: BoardTitles.NOT_FAVORITES,
     items: [],
   },

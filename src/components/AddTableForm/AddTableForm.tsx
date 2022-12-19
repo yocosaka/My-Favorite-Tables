@@ -1,5 +1,7 @@
 // import styles from './AddTableForm.module.scss';
 
+import { useDispatch } from 'react-redux';
+
 type PropTypes = {
   table: google.maps.places.PlaceResult | undefined;
 };
