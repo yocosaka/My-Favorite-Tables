@@ -3,7 +3,7 @@
 // import StarIcon from '@mui/icons-material/Star';
 // import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 // import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import Boards from 'src/components/MyTables/MyTables';
+import MyTables from 'src/components/MyTables/MyTables';
 import styles from './Home.module.scss';
 
 const Home = () => {
@@ -11,7 +11,7 @@ const Home = () => {
 
   return (
     <div className={styles.container}>
-      <Boards />
+      <MyTables />
     </div>
   );
 };

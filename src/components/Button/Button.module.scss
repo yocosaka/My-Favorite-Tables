@@ -1,29 +1,47 @@
 .button {
   font-weight: bold;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: var(--border-radius);
   border: 1px solid;
   background: var(--color-black);
   color: var(--color-yellow);
-  font-size: 1.6rem;
   transition: all 0.2s;
-  box-shadow: var(--box-shadow-1);
   text-decoration: none;
-  display: block;
-  height: 100%;
-  padding: 1rem 2rem;
-  color: var(--color-yellow);
+  // height: 100%;
   text-transform: uppercase;
-  margin: 2rem auto;
-
-  &:hover {
-    // background: var(--color-yellow);
-    // color: var(--color-black);
-    box-shadow: var(--box-shadow-1-hover);
-  }
+  line-height: 1;
 
   &.primary {
     background: var(--color-blue);
     color: var(--color-white);
+  }
+
+  &.small {
+    font-size: 1.5rem;
+    padding: 0.8rem 1rem 0.4rem 1rem;
+    margin: 0.4rem auto 0;
+    &:hover {
+      box-shadow: var(--box-shadow-2);
+    }
+  }
+  &.medium {
+    font-size: 1.6rem;
+    padding: 1rem 2rem 0.8rem 2rem;
+    margin: 2rem auto;
+    box-shadow: var(--box-shadow-1);
+    &:hover {
+      box-shadow: var(--box-shadow-1-hover);
+    }
+  }
+  &.large {
+    font-size: 1.7rem;
+    padding: 1rem 2rem 0.5rem 2rem;
+    margin: 2rem auto;
+    box-shadow: var(--box-shadow-1);
+    &:hover {
+      box-shadow: var(--box-shadow-1-hover);
+    }
   }
 }

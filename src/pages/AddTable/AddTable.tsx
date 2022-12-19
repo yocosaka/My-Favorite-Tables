@@ -172,7 +172,7 @@ const AddTable = () => {
       </div>
 
       {/* <BasicModal Component={AddTableForm} /> */}
-      <Button onClick={() => table && onAddBtnClick(table)}>
+      <Button onClick={() => table && onAddBtnClick(table)} size={'medium'}>
         Add this table to my list
       </Button>
       {error && <div>{error}</div>}
