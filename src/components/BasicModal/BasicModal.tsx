@@ -7,16 +7,21 @@ import Button from '../Button';
 type PropTypes = {
   ContentComponent: React.FunctionComponent;
   btnText?: string;
+  btnSize?: 'small' | 'medium' | 'large';
 };
 
-const BasicModal = ({ ContentComponent, btnText = '' }: PropTypes) => {
+const BasicModal = ({
+  ContentComponent,
+  btnText = '',
+  btnSize = 'medium',
+}: PropTypes) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <div>
-      <Button onClick={handleOpen} size={'small'}>
+      <Button onClick={handleOpen} size={btnSize}>
         {btnText ? btnText : 'Open Modal'}
       </Button>
       <Modal

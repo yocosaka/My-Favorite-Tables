@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GoogleMap, StandaloneSearchBox, Marker } from '@react-google-maps/api';
-// import BasicModal from 'src/components/BasicModal';
+import BasicModal from 'src/components/BasicModal';
 import Button from 'src/components/Button';
 import Page from 'src/components/Page';
 import TableInfo from 'src/components/TableInfo';
@@ -11,7 +11,7 @@ import { columnsSelector, updateColumns } from 'src/store/columns/columnsSlice';
 import { ColumnsType } from 'src/store/columns/columnsState';
 import { v4 as uuid } from 'uuid';
 import styles from './AddTable.module.scss';
-// import AddTableForm from '../../components/AddTableForm';
+import AddTableForm from '../../components/AddTableForm';
 
 let markerArray = [];
 
@@ -143,6 +143,9 @@ const AddTable = () => {
     dispatch(updateColumns(columns));
   }, [columns, dispatch]);
 
+  const CustomAddTableForm = () => {
+    return <AddTableForm table={customTable} />;
+  };
   return (
     <Page>
       <div id="searchbox">
@@ -160,7 +163,6 @@ const AddTable = () => {
           </div>
         </StandaloneSearchBox>
       </div>
-
       <div className={styles.infoContainer}>
         <div className={styles.mapContainer}>
           <GoogleMap
@@ -187,18 +189,22 @@ const AddTable = () => {
         )}
       </div>
 
-      {/* <BasicModal Component={AddTableForm} /> */}
-      <Button
-        onClick={() => customTable && onAddBtnClick(customTable)}
-        size={'medium'}
-      >
-        Add this table to my list
-      </Button>
+      {table && (
+        <>
+          <Button
+            onClick={() => customTable && onAddBtnClick(customTable)}
+            size={'medium'}
+          >
+            Add this table to my list anyway
+          </Button>
+
+          <BasicModal
+            ContentComponent={CustomAddTableForm}
+            btnText={'Add this table with my comment'}
+          />
+        </>
+      )}
       {error && <div>{error}</div>}
-      {/* <Button onClick={() => setShowForm(!showForm)}>
-        {showForm ? 'Close form' : 'Add this table to my list'}
-      </Button> */}
-      {/* {showForm && <AddTableForm table={table} />} */}
     </Page>
   );
 };

@@ -30,6 +30,7 @@ const Card = ({ item, index }: PropTypes) => {
             <BasicModal
               ContentComponent={MyTable as React.FunctionComponent}
               btnText={'Show More'}
+              btnSize={'small'}
             />
           </div>
         </div>
