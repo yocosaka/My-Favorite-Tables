@@ -6,7 +6,7 @@ import { GoogleMap, StandaloneSearchBox, Marker } from '@react-google-maps/api';
 import Button from 'src/components/Button';
 import Page from 'src/components/Page';
 import TableInfo from 'src/components/TableInfo';
-import { ItemType } from 'src/constants/variables';
+import { TableType } from 'src/constants/variables';
 import { columnsSelector, updateColumns } from 'src/store/columns/columnsSlice';
 import { ColumnsType } from 'src/store/columns/columnsState';
 import { v4 as uuid } from 'uuid';
@@ -27,6 +27,9 @@ const AddTable = () => {
   const [table, setTable] = useState<
     google.maps.places.PlaceResult | undefined
   >(undefined);
+  const [customTable, setCustomTable] = useState<TableType | undefined>(
+    undefined,
+  );
   const [bounds, setBounds] = useState<
     google.maps.LatLngBounds | google.maps.LatLngBoundsLiteral | undefined
   >(undefined);
@@ -70,24 +73,39 @@ const AddTable = () => {
     console.log('markerArray', markerArray);
   };
 
-  const onAddBtnClick = (tableToAdd: google.maps.places.PlaceResult) => {
+  const onAddBtnClick = (customTable: TableType) => {
     console.log('AddBtnClicked!', table);
     // Check if the place is an restaurant, cafe
     if (
-      !tableToAdd.types?.includes('cafe') &&
-      !tableToAdd.types?.includes('restaurant') &&
-      !tableToAdd.types?.includes('food')
+      !customTable.gmapInfo.types?.includes('cafe') &&
+      !customTable.gmapInfo.types?.includes('restaurant') &&
+      !customTable.gmapInfo.types?.includes('food')
     ) {
       setError(
         'Sorry, only Restaurant or cafe can be added to your table list.',
       );
       return;
     }
-    // custmize item
-    const newItem = {
+
+    // update columns
+    setColumns({
+      ...columns,
+      togo: {
+        title: columns.togo.title,
+        items: [customTable, ...columns.togo.items],
+      },
+    });
+  };
+
+  useEffect(() => {
+    if (!table) {
+      return;
+    }
+    // generate newTable
+    const newTable = {
       id: uuid(),
-      name: tableToAdd.name,
-      category: tableToAdd.types[0],
+      name: table.name,
+      category: table.types ? table.types[0] : 'food',
       area: 'Tokyo',
       needToBook: false,
       review: {
@@ -99,15 +117,15 @@ const AddTable = () => {
       },
       scene: 'Casual',
       gmapInfo: {
-        types: tableToAdd.types || [],
-        icon: tableToAdd.icon || '',
-        opening_hours: tableToAdd.opening_hours?.weekday_text || [],
-        address: tableToAdd.formatted_address,
-        main_photo: (tableToAdd.photos && tableToAdd.photos[0].getUrl()) || '',
-        gmapUrl: tableToAdd.url || '',
-        websiteUrl: tableToAdd.website || '',
-        tel: tableToAdd.formatted_phone_number || '',
-        price_level: tableToAdd.price_level || 3,
+        types: table.types || [],
+        icon: table.icon || '',
+        opening_hours: table.opening_hours?.weekday_text || [],
+        address: table.formatted_address,
+        main_photo: (table.photos && table.photos[0].getUrl()) || '',
+        gmapUrl: table.url || '',
+        websiteUrl: table.website || '',
+        tel: table.formatted_phone_number || '',
+        price_level: table.price_level || 3,
       },
       memo: 'Memo',
       favoriteMenus: [
@@ -116,16 +134,10 @@ const AddTable = () => {
           price: 1200,
         },
       ],
-    } as unknown as ItemType;
-    // update columns
-    setColumns({
-      ...columns,
-      togo: {
-        title: columns.togo.title,
-        items: [newItem, ...columns.togo.items],
-      },
-    });
-  };
+    } as unknown as TableType;
+
+    setCustomTable(newTable);
+  }, [table]);
 
   useEffect(() => {
     dispatch(updateColumns(columns));
@@ -168,11 +180,18 @@ const AddTable = () => {
           </GoogleMap>
         </div>
 
-        {table && <TableInfo table={table} />}
+        {customTable && (
+          <div className={styles.textContainer}>
+            <TableInfo table={customTable} />
+          </div>
+        )}
       </div>
 
       {/* <BasicModal Component={AddTableForm} /> */}
-      <Button onClick={() => table && onAddBtnClick(table)} size={'medium'}>
+      <Button
+        onClick={() => customTable && onAddBtnClick(customTable)}
+        size={'medium'}
+      >
         Add this table to my list
       </Button>
       {error && <div>{error}</div>}

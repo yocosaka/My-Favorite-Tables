@@ -1,48 +1,60 @@
 import { v4 as uuid } from 'uuid';
-import { BoardTitles, ItemType } from './variables';
+import { BoardTitles, TableType } from './variables';
 
-export const sampleItems: ItemType[] = [
+export const sampleItems: TableType[] = [
   {
     id: uuid(),
     name: 'Mos Burgur Kunitachi',
     category: 'Humburgur',
     area: 'Kunitachi',
-    // board: BoardNames.TO_GO,
+    gmapInfo: {
+      types: ['restaurant', 'food', 'cafe'],
+    },
   },
   {
     id: uuid(),
     name: 'Koenji Thai kaan',
     category: 'Thaifood',
     area: 'Koenji',
-    // board: BoardNames.TO_GO,
+    gmapInfo: {
+      types: ['restaurant', 'food', 'cafe'],
+    },
   },
   {
     id: uuid(),
     name: 'Burgur King Kunitachi',
     category: 'Humburgur',
     area: 'Kunitachi',
-    // board: BoardNames.TO_GO,
+    gmapInfo: {
+      types: ['restaurant', 'food', 'cafe'],
+    },
   },
   {
     id: uuid(),
     name: 'Ichirin',
     category: 'Cake',
     area: 'Kunitachi',
-    // board: BoardNames.TO_GO,
+    gmapInfo: {
+      types: ['restaurant', 'food', 'cafe'],
+    },
   },
   {
     id: uuid(),
     name: 'Komeda Coffee',
     category: 'Cafe',
     area: 'kunitachi',
-    // board: BoardNames.TO_GO,
+    gmapInfo: {
+      types: ['restaurant', 'food', 'cafe'],
+    },
   },
   {
     id: uuid(),
     name: 'sushi near Kunitachi',
     category: 'Sushi',
     area: 'Kunitachi',
-    // board: BoardNames.TO_GO,
+    gmapInfo: {
+      types: ['restaurant', 'food', 'cafe'],
+    },
   },
 ];
 

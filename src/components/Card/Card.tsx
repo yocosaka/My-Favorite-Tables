@@ -1,18 +1,19 @@
 import { Draggable } from 'react-beautiful-dnd';
-import { ItemType } from 'src/constants/variables';
+import { TableType } from 'src/constants/variables';
 import styles from './Card.module.scss';
 import BasicModal from '../BasicModal';
-import MyTable from '../MyTable';
+import TableInfo from '../TableInfo';
 
 type PropTypes = {
-  item: ItemType;
+  item: TableType;
   index: number;
 };
 
 const Card = ({ item, index }: PropTypes) => {
-  const CustomMyTable = () => {
-    return <MyTable table={item} />;
+  const MyTable = () => {
+    return <TableInfo table={item} />;
   };
+
   return (
     <Draggable key={item.id} draggableId={item.id} index={index}>
       {(provided) => (
@@ -27,7 +28,7 @@ const Card = ({ item, index }: PropTypes) => {
             <div className={styles.category}>{item.category}</div>
             <div className={styles.area}>{item.area}</div>
             <BasicModal
-              ContentComponent={CustomMyTable as React.FunctionComponent}
+              ContentComponent={MyTable as React.FunctionComponent}
               btnText={'Show More'}
             />
           </div>

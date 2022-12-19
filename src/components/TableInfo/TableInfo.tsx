@@ -1,55 +1,61 @@
 import GoogleIcon from '@mui/icons-material/Google';
 import WebAssetIcon from '@mui/icons-material/WebAsset';
+import { TableType } from 'src/constants/variables';
 import { v4 as uuid } from 'uuid';
 import styles from './TableInfo.module.scss';
 
 type PropTypes = {
-  table: google.maps.places.PlaceResult;
+  table: TableType;
 };
 const TableInfo = ({ table }: PropTypes) => {
   return (
-    <div className={styles.textContainer}>
+    <>
       <div className={styles.titleWrapper}>
-        <img src={table.icon} alt={table.types ? table.types[0] : table.name} />
+        {table.gmapInfo.icon && (
+          <img
+            src={table.gmapInfo.icon}
+            alt={table.gmapInfo.types ? table.gmapInfo.types[0] : table.name}
+          />
+        )}
         <h2>{table.name}</h2>
       </div>
-      {table.photos && (
+      {table.gmapInfo.main_photo && (
         <div className={styles.imageContainer}>
           <img
-            src={table.photos[0].getUrl()}
+            src={table.gmapInfo.main_photo}
             alt={table.name}
             className={styles.mainImage}
           />
         </div>
       )}
-      <div className={styles.address}>{table.formatted_address}</div>
+      <div className={styles.address}>{table.gmapInfo.address}</div>
       {/* <div>{table.formatted_phone_number}</div> */}
       {/* <div>Status:{table.business_status}</div> */}
       {/* <div>Price: {table.price_level}</div> */}
       <div className={styles.types}>
-        {table.types?.map((type) => (
+        {table.gmapInfo.types?.map((type) => (
           <div className={styles.type} key={uuid()}>
             {type}
           </div>
         ))}
       </div>
-      {table.url && (
+      {table.gmapInfo.gmapUrl && (
         <div className={styles.url}>
           <GoogleIcon />
-          <a href={table.url} target="_blank">
+          <a href={table.gmapInfo.gmapUrl} target="_blank">
             See on Google Map
           </a>
         </div>
       )}
-      {table.website && (
+      {table.gmapInfo.websiteUrl && (
         <div className={styles.website}>
           <WebAssetIcon />
-          <a href={table.website} target="_blank">
+          <a href={table.gmapInfo.websiteUrl} target="_blank">
             Website
           </a>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import { BoardTitles, ItemType } from 'src/constants/variables';
+import { BoardTitles, TableType } from 'src/constants/variables';
 
 export interface ColumnsState {
   columns: ColumnsType;
@@ -7,6 +7,6 @@ export interface ColumnsState {
 export type ColumnsType = {
   [x: string]: {
     title: BoardTitles;
-    items: ItemType[];
+    items: TableType[];
   };
 };
