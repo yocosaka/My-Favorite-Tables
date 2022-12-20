@@ -2,11 +2,13 @@
 
 _NOTE: This project is still on going..._<br />
 This is the app to keep your favorite restaurants' information on boards.
-It allows you to list, manage, and record those restaurants and your review.
+It allows you to list, manage, and record those restaurants and your reviews.
 In addition, you can search your restaurants' list by places, tags, and categories.
-![screenshot](./screenshots/main.png)
-![screenshot](./screenshots/add-table.png)
-![screenshot](./screenshots/map.png)
+
+![screenshot](./screenshots/tables.gif)
+
+<!-- ![screenshot](./screenshots/add-table.png)
+![screenshot](./screenshots/map.png) -->
 
 ## Built With
 
@@ -50,7 +52,7 @@ This project is [MIT](./LICENSE) licensed.
 ## Acknowledgements
 
 - [@react-google-maps/api](https://github.com/JustFly1984/react-google-maps-api)
-- [react-dnd](https://react-dnd.github.io/react-dnd/about)
+- [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd)
 
 ## Available Scripts
 
@@ -72,4 +74,4 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<!-- See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information. -->
