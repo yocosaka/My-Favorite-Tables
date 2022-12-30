@@ -1,6 +1,7 @@
 /*global google*/
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { GoogleMap, StandaloneSearchBox, Marker } from '@react-google-maps/api';
 import BasicModal from 'src/components/BasicModal';
 import Button from 'src/components/Button';
@@ -19,6 +20,7 @@ type locationType = google.maps.LatLng;
 
 const AddTable = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const columnsData = useSelector(columnsSelector);
   const [columns, setColumns] = useState<ColumnsType>(columnsData);
   const defaultCurrentLoc = new google.maps.LatLng(0, 0);
@@ -95,6 +97,10 @@ const AddTable = () => {
         items: [customTable, ...columns.togo.items],
       },
     });
+
+    setTimeout(() => {
+      navigate('/');
+    }, 1000);
   };
 
   useEffect(() => {
