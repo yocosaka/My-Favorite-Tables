@@ -1,11 +1,12 @@
 import { ReactNode } from 'react';
 import clsx from 'clsx';
 import styles from './Button.module.scss';
+import { BtnSizeType, BtnVariantType } from '../../types/types';
 
 type PropTypes = {
   children: ReactNode;
-  variant?: 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
-  size?: 'small' | 'medium' | 'large';
+  variant?: BtnVariantType;
+  size?: BtnSizeType;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 

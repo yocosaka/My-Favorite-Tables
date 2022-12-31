@@ -24,15 +24,18 @@ const Card = ({ item, index }: PropTypes) => {
           className={styles.card}
         >
           <div className={styles.content}>
+            <div className={styles.attr}>
+              <div className={styles.category}>{item.category}</div>
+              <div className={styles.area}>{item.area}</div>
+            </div>
             <h1 className={styles.name}>{item.name}</h1>
-            <div className={styles.category}>{item.category}</div>
-            <div className={styles.area}>{item.area}</div>
-            <BasicModal
-              ContentComponent={MyTable as React.FunctionComponent}
-              btnText={'Show More'}
-              btnSize={'small'}
-            />
           </div>
+          <BasicModal
+            ContentComponent={MyTable as React.FunctionComponent}
+            btnText={'More'}
+            btnSize={'small'}
+            btnVariant={'simple'}
+          />
         </div>
       )}
     </Draggable>
