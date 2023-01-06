@@ -18,15 +18,15 @@ export interface TableType {
   category: string; //customizable by users
   // board: BoardNames;
   area: string; //customizable by users
-  needToBook?: boolean;
+  betterToReserve?: boolean;
   review?: {
     atmosphere: ReviewType;
     taste: ReviewType;
     hospitality: ReviewType;
-    convenience: ReviewType;
+    location: ReviewType;
     cost_performance: ReviewType;
   };
-  scene?: string[];
+  scenes?: string[];
   gmapInfo: {
     // data gets from api
     types: string[]; // table.types

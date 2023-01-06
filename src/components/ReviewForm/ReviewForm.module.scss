@@ -1,0 +1,18 @@
+.fields {
+  padding: 1rem;
+}
+
+.field {
+  margin-bottom: 1rem;
+}
+
+.rating {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+
+  .field {
+    width: 50%;
+    margin-bottom: 0;
+  }
+}

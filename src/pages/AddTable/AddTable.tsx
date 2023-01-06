@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { GoogleMap, StandaloneSearchBox, Marker } from '@react-google-maps/api';
 import BasicModal from 'src/components/BasicModal';
-import Button from 'src/components/Button';
 import Page from 'src/components/Page';
 import TableInfo from 'src/components/TableInfo';
 import { TableType } from 'src/constants/variables';
@@ -113,15 +112,15 @@ const AddTable = () => {
       name: table.name,
       category: table.types ? table.types[0] : 'food',
       area: 'Tokyo',
-      needToBook: false,
+      betterToReserve: false,
       review: {
         atmosphere: 5,
         taste: 5,
         hospitality: 5,
-        convenience: 3,
+        location: 3,
         cost_performance: 4,
       },
-      scene: 'Casual',
+      scenes: 'Casual',
       gmapInfo: {
         types: table.types || [],
         icon: table.icon || '',
@@ -150,7 +149,11 @@ const AddTable = () => {
   }, [columns, dispatch]);
 
   const CustomAddTableForm = () => {
-    return <AddTableForm table={customTable} />;
+    return customTable ? (
+      <AddTableForm table={customTable} onAddBtnClick={onAddBtnClick} />
+    ) : (
+      <></>
+    );
   };
   return (
     <Page>
@@ -194,16 +197,8 @@ const AddTable = () => {
           </div>
         )}
       </div>
-
-      {table && (
+      {customTable && (
         <>
-          <Button
-            onClick={() => customTable && onAddBtnClick(customTable)}
-            size={'medium'}
-          >
-            Add this table to my list anyway
-          </Button>
-
           <BasicModal
             ContentComponent={CustomAddTableForm}
             btnText={'Add this table with my comment'}
